@@ -23,7 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "YTKBaseRequest.h"
-#import "AFNetworking.h"
+#import <AFNetworking/AFNetworking.h>
 #import "NetWorkBaseUrlConfig.h"
 
 @interface YTKNetworkAgent : NSObject

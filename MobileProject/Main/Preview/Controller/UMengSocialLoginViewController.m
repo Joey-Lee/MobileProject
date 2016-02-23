@@ -30,8 +30,9 @@
 #pragma mark 布局
 -(void)initPageLoad
 {
-    UIButton *qqBtn=[UIButton new];
+    UIButton *qqBtn= [UIButton new];
     [qqBtn setTitle:@"QQ登录" forState:UIControlStateNormal];
+    qqBtn.backgroundColor = [UIColor blueColor];
     [qqBtn addTarget:self action:@selector(qqBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:qqBtn];
     [qqBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,6 +43,7 @@
     
     UIButton *wechatBtn=[UIButton new];
     [wechatBtn setTitle:@"微信登录" forState:UIControlStateNormal];
+    wechatBtn.backgroundColor = [UIColor blueColor];
     [wechatBtn addTarget:self action:@selector(wechatBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:wechatBtn];
     [wechatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,6 +54,7 @@
     
     UIButton *weiboBtn=[UIButton new];
     [weiboBtn setTitle:@"新浪微博登录" forState:UIControlStateNormal];
+    weiboBtn.backgroundColor = [UIColor blueColor];
     [weiboBtn addTarget:self action:@selector(weiboBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:weiboBtn];
     [weiboBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,30 +65,31 @@
     
     if ([WXApi isWXAppInstalled])
     {
-        
+        wechatBtn.hidden = NO;
     }
     else
     {
-        //wechatBtn.hidden=YES;
+        wechatBtn.hidden=YES;
         NSLog(@"微信客户端没有安装，要把页面的微信隐藏起来，否则会被拒绝上架");
     }
     
     if ([QQApiInterface isQQInstalled])
     {
+        qqBtn.hidden = NO;
     }
     else
     {
-        //qqBtn.hidden=YES;
+        qqBtn.hidden=YES;
         NSLog(@"QQ客户端没有安装，要把页面的QQ隐藏起来，否则会被拒绝上架");
     }
     
     if ([WeiboSDK isCanShareInWeiboAPP])
     {
-        
+        weiboBtn.hidden = NO;;
     }
     else
     {
-        //weiboBtn.hidden=YES;
+        weiboBtn.hidden=YES;
         NSLog(@"新浪客户端没有安装，要把页面的新浪隐藏起来，否则会被拒绝上架");
     }
 }
@@ -111,6 +115,7 @@
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
             //获得一些信息，然后跟本服务器后端进行账号的绑定，并实现登录的功能
             NSLog(@"username is %@, uid is %@, token is %@ url is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            [[GVUserDefaults standardUserDefaults] setUserName:snsAccount.userName];
         }
     });
 }

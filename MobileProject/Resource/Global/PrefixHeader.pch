@@ -13,7 +13,7 @@
 #import <CocoaLumberjack.h>
 #import "Macros.h"
 #import "ThirdMacros.h"
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking.h"
 #import <Masonry/Masonry.h>
 #import <JSONModel/JSONModel.h>
 #import "UIImageView+WebCache.h"

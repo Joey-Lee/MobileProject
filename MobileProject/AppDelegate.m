@@ -52,7 +52,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    [self setupLoginViewController];
+    
+    if ([GVUserDefaults standardUserDefaults].userName) {
+        NSLog(@"当前登录用户名：%@", [GVUserDefaults standardUserDefaults].userName);
+        [self setupHomeViewController];
+    } else {
+        [self setupLoginViewController];
+    }
     
     return YES;
 }
